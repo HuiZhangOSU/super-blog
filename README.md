@@ -8,3 +8,6 @@ Generally, it is a personal blog, but not just a blog, it would be an ultimate a
 - Theme change
 - Good performance on very limited resources (like 1C2G virtual host)
 - Good flexibility in compatibility with self-written gargets
+
+### Tech stack
+- SpringBoot + React
