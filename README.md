@@ -1,7 +1,7 @@
 ### Communication contract
 - How my microservice request data?
     - In our apps, RabbitMQ is the data passing tool between microservices. So that we don't have to request data in an explicit way.
-    - We both send data by our producer.
+    - We both send data by our producers.
 - How my microservice receive data?
     - My microservice(consumer) will subscribe Stephen's RabbitMQ, 
     - If there are new data passed by Stephen's microservice(his producer), my consumer will receive the data
