@@ -194,25 +194,51 @@ const App = () => {
         setIsRSSHintVisible(true);
     }
 
-    const handleRSSHintOK = ()=>{
+    const handleRSSHintOK = () => {
         setIsRSSHintVisible(false);
     }
 
-    const handleRSSHintCancel = ()=>{
+    const handleRSSHintCancel = () => {
         setIsRSSHintVisible(false);
     }
 
-    const handleNewFeatureOk = ()=>{
+    const handleNewFeatureOk = () => {
         setIsNewFeatureModalVisible(false);
     }
 
-    const handleNewFeatureCancel = ()=>{
+    const handleNewFeatureCancel = () => {
         setIsNewFeatureModalVisible(false);
     }
 
-    const createArticle = ()=>{
+    const createArticle = () => {
 
     }
+    const sendExpensesInfo = async () => {
+        let username = document.getElementById("username").value
+        let email = document.getElementById("email").value
+        let rent = document.getElementById("rentExpense").value
+        let food = document.getElementById("foodExpense").value
+        let game = document.getElementById("gameExpense").value
+
+        const response = await fetch('/saveExpenses', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                rent: rent,
+                food: food,
+                game: game,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(response => response.json()).then(json => {
+            if (json.status === "success") {
+                alert("Expenses Submit Successful!");
+            }
+        })
+    }
+
 
     return (
         <>
@@ -229,7 +255,8 @@ const App = () => {
                         Create</Button>
                     <Modal title="New Features" visible={isNewFeatureModalVisible} onOk={handleNewFeatureOk}
                            onCancel={handleNewFeatureCancel}>
-                        <p>1. We've added a verification process via the phone number or email, which would increase the security of user accounts</p>
+                        <p>1. We've added a verification process via the phone number or email, which would increase the
+                            security of user accounts</p>
                         <p>2. We’ve added an RSS feed option.</p>
                     </Modal>
                     <Modal
@@ -321,11 +348,53 @@ const App = () => {
                         defaultSelectedKeys={["Newest"]}
                         items={[
                             {label: "Newest"},
-                            {label: "Hottest"}
+                            {label: "Hottest"},
+                            {
+                                label: (
+                                    <Button>
+                                        Tools
+                                    </Button>
+                                ),
+                            },
                         ]}
                     />
                     <div className="site-layout-content" style={{textAlign: 'center'}}>
-                        Empty Content Now
+                        <div className="articles-content">
+                        </div>
+                        <div className="tool-content">
+                            <Input.Group compact style={{
+                                marginTop: '10px',
+                                marginLeft: '380px',
+                                width: '500px',
+                                background: '#ebe6da'
+                            }}>
+                                <h3 className="tool-title" style={{margin: '5px',}}>
+                                    Expense Record Tool
+                                </h3>
+                                <Input placeholder="Username"
+                                       style={{width: '200px', display: "block", margin: '5px', marginLeft: '150px'}}
+                                       id="username"/>
+                                <Input placeholder="Email address"
+                                       style={{width: '200px', display: "block", margin: '5px', marginLeft: '150px'}}
+                                       id="email"/>
+                                <Input placeholder="Rent expense"
+                                       style={{width: '200px', display: "block", margin: '5px', marginLeft: '150px'}}
+                                       id="rentExpense"/>
+                                <Input placeholder="Food expense"
+                                       style={{width: '200px', display: "block", margin: '5px', marginLeft: '150px'}}
+                                       id="foodExpense"/>
+                                <Input placeholder="Game expense"
+                                       style={{width: '200px', display: "block", margin: '5px', marginLeft: '150px'}}
+                                       id="gameExpense"/>
+                                <Button type="default" onClick={sendExpensesInfo}
+                                        style={{
+                                            width: '80px',
+                                            display: "block",
+                                            margin: '5px',
+                                            marginLeft: '210px'
+                                        }}>Submit</Button>
+                            </Input.Group>
+                        </div>
                     </div>
                 </Content>
                 <Footer
@@ -340,11 +409,11 @@ const App = () => {
                         <Button type="primary"
                                 id={"subscribeButton"}
                                 onClick={subscribe}
-                                style={{visibility:'visible'}}>Subscribe</Button>
+                                style={{visibility: 'visible'}}>Subscribe</Button>
                         <Button type="default"
                                 id={"unsubscribeButton"}
                                 onClick={unsubscribe}
-                                style={{visibility:'hidden',float: 'left'}}>Unsubscribe</Button>
+                                style={{visibility: 'hidden', float: 'left'}}>Unsubscribe</Button>
                         <Tooltip title="Advanced Options">
                             <SettingOutlined style={{margin: '10px'}} onClick={showRSSSetting}/>
                         </Tooltip>
@@ -356,7 +425,8 @@ const App = () => {
                         <p>
                             This is an advance option, and it needs extra knowledge of RSS.
                         </p>
-                        <Button type={"link"} href={"https://en.wikipedia.org/wiki/Rashtriya_Swayamsevak_Sangh"}> RSS </Button>
+                        <Button type={"link"}
+                                href={"https://en.wikipedia.org/wiki/Rashtriya_Swayamsevak_Sangh"}> RSS </Button>
                     </Modal>
 
                     <p>Super Blog ©2022 Created by Hui Zhang</p>

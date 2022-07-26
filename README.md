@@ -1,13 +1,24 @@
-# super-blog
-Generally, it is a personal blog, but not just a blog, it would be an ultimate app that contains most of the important tools people need.
+### Communication contract
+- How my microservice request data?
+    - In this app, RabbitMQ is the data passing tool between microservices. 
+    - So that we don't have to request data in an explicit way.
+    - We both send data by one of our microservice(producer).
+- How my microservice receive data?
+    - My microservice(consumer) will subscribe Stephen's RabbitMQ, 
+    - If there are new data passed by Stephen's microservice(his producer), my consumer will receive the data
+- The format of the data between microservices
+```
+{
+   "username":"Hui Zhang",
+   "email":"zhangh9@oregonstate.edu",
+   "expenses":{
+      "rent":"1000",
+      "food":"200",
+      "game":"80"
+   }
+}
+```
 
-### The unique features of this app
-#### Actually features need to be implemented in the future
-- Can export all of your jottings or articles at any time
-- Super simple deployment method
-- Theme change
-- Good performance on very limited resources (like 1C2G virtual host)
-- Good flexibility in compatibility with self-written gargets
+### UML sequence diagram
 
-### Tech stack
-- SpringBoot + React
+
