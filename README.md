@@ -21,7 +21,7 @@ amqps://stephen:StephenOSU@b-e01a602c-5662-4ffe-a635-733e9ba114fe.mq.us-west-2.a
 amqps://hui:HuiOSU@b-e01a602c-5662-4ffe-a635-733e9ba114fe.mq.us-west-2.amazonaws.com:5671
 
 ```
-- The format of the data between microservices, (send data in this format to my MQ)
+- The format of the data between microservices (send data in this format to my MQ)
 ```
 {
    "username":"Hui Zhang",
